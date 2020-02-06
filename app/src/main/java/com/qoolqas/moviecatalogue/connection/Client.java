@@ -1,14 +1,21 @@
 package com.qoolqas.moviecatalogue.connection;
 
+import com.qoolqas.moviecatalogue.BuildConfig;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Client {
-    public static final String BASE_URL_API = "https://pkl-api.adsmall.id/api/v1/";
-
+    private final static String API_KEY = BuildConfig.API_KEY;
+    public static final String BASE_URL_API = "https://api.themoviedb.org/3/";
     private static Retrofit retrofit = null;
+
+    public static String getApiKey() {
+        return API_KEY;
+    }
+
 
     public static Retrofit getClient(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
