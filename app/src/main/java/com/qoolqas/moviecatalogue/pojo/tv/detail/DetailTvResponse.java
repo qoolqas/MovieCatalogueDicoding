@@ -1,12 +1,10 @@
 package com.qoolqas.moviecatalogue.pojo.tv.detail;
 
-import java.util.List;
-
-import javax.annotation.Generated;
-
 import com.google.gson.annotations.SerializedName;
 
-@Generated("com.robohorse.robopojogenerator")
+import java.util.List;
+
+
 public class DetailTvResponse {
 
     @SerializedName("original_language")

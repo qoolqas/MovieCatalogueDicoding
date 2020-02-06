@@ -14,7 +14,7 @@ public class SimiliarMovieResponse {
     private int totalPages;
 
     @SerializedName("results")
-    private List<ResultsItem> results;
+    private List<SimiliarResultsItem> results;
 
     @SerializedName("total_results")
     private int totalResults;
@@ -35,11 +35,11 @@ public class SimiliarMovieResponse {
         return totalPages;
     }
 
-    public void setResults(List<ResultsItem> results) {
+    public void setResults(List<SimiliarResultsItem> results) {
         this.results = results;
     }
 
-    public List<ResultsItem> getResults() {
+    public List<SimiliarResultsItem> getResults() {
         return results;
     }
 

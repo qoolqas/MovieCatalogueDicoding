@@ -1,10 +1,8 @@
 package com.qoolqas.moviecatalogue.pojo.tv.detail;
 
-import javax.annotation.Generated;
-
 import com.google.gson.annotations.SerializedName;
 
-@Generated("com.robohorse.robopojogenerator")
+
 public class GenresItem {
 
     @SerializedName("name")
