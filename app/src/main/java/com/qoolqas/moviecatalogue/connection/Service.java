@@ -5,6 +5,7 @@ import com.qoolqas.moviecatalogue.pojo.movie.image.ImageMovieResponse;
 import com.qoolqas.moviecatalogue.pojo.movie.MovieResponse;
 
 import com.qoolqas.moviecatalogue.pojo.movie.detail.DetailMovieResponse;
+import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingMovieResponse;
 import com.qoolqas.moviecatalogue.pojo.tv.TvResponse;
 import com.qoolqas.moviecatalogue.pojo.movie.videos.VideoMovieResponse;
 
@@ -18,6 +19,9 @@ public interface Service {
 
     @GET("discover/movie")
     Call<MovieResponse> getMovie(@Query("api_key") String apiKey);
+
+    @GET("movie/now_playing")
+    Call<NowPlayingMovieResponse> getNowplayingMovie(@Query("api_key") String apiKey);
 
 
     @GET("movie/{movie_id}")
@@ -39,6 +43,7 @@ public interface Service {
     @GET("movie/{movie_id}/similar")
     Call<DetailMovieResponse> getSimiliarMovie(@Query("api_key") String apiKey,
                                                @Path("movie_id") int id);
+
 
     @GET("discover/tv")
     Call<TvResponse> getShow(@Query("api_key") String apiKey);
