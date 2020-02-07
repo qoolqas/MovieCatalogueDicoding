@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qoolqas.moviecatalogue.CenterZoomLayoutManager;
 import com.qoolqas.moviecatalogue.R;
 import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingMovieResponse;
 
@@ -22,13 +23,14 @@ public class MovieFragment extends Fragment {
     private MovieNowplayingAdapter movieNowplayingAdapter;
     LinearLayoutManager layoutManagerHor
             = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    CenterZoomLayoutManager centerZoomLayoutManager = new CenterZoomLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_movie, container, false);
         rvNowplaying = v.findViewById(R.id.rv_nowplaying);
         rvNowplaying.setHasFixedSize(true);
-        rvNowplaying.setLayoutManager(layoutManagerHor);
+        rvNowplaying.setLayoutManager(centerZoomLayoutManager);
         setHasOptionsMenu(true);
 
         movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
