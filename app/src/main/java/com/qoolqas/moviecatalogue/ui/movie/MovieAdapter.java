@@ -6,11 +6,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingMovieResponse;
-import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingResultsItem;
-
-import java.util.List;
-
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolderMovie> {
 
     @NonNull

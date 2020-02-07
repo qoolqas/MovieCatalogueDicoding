@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,6 +53,19 @@ public class MovieNowplayingAdapter extends RecyclerView.Adapter<MovieNowplaying
 
         public ViewHolderMovieNp(@NonNull View itemView) {
             super(itemView);
+            itemView.setOnFocusChangeListener((v, hasFocus) -> {
+                if (hasFocus) {
+                    // run scale animation and make it bigger
+                    Animation anim = AnimationUtils.loadAnimation(context, R.anim.scale_in_tv);
+                    itemView.startAnimation(anim);
+                    anim.setFillAfter(true);
+                } else {
+                    // run scale animation and make it smaller
+                    Animation anim = AnimationUtils.loadAnimation(context, R.anim.scale_out_tv);
+                    itemView.startAnimation(anim);
+                    anim.setFillAfter(true);
+                }
+            });
             np_img = itemView.findViewById(R.id.np_img);
             np_title = itemView.findViewById(R.id.np_title);
 
