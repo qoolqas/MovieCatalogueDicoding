@@ -22,7 +22,7 @@ public class MovieViewModel extends ViewModel {
     private MutableLiveData<NowPlayingMovieResponse> getNowplayingMovie;
     private final static String api = Client.getApiKey();
 
-    public void loadMovie() {
+    private void loadMovie() {
         Service service = Client.getClient().create(Service.class);
         Call<MovieResponse> call = service.getMovie(api);
         call.enqueue(new Callback<MovieResponse>() {

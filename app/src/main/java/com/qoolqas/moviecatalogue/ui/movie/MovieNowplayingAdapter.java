@@ -47,11 +47,11 @@ public class MovieNowplayingAdapter extends RecyclerView.Adapter<MovieNowplaying
         return nowPlaying.size();
     }
 
-    public class ViewHolderMovieNp extends RecyclerView.ViewHolder {
+    class ViewHolderMovieNp extends RecyclerView.ViewHolder {
         ImageView np_img;
         TextView np_title;
 
-        public ViewHolderMovieNp(@NonNull View itemView) {
+        ViewHolderMovieNp(@NonNull View itemView) {
             super(itemView);
             itemView.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {

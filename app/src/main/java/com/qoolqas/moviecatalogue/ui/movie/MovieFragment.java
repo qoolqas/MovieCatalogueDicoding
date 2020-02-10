@@ -7,23 +7,21 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.qoolqas.moviecatalogue.CenterZoomLayoutManager;
 import com.qoolqas.moviecatalogue.R;
-import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingMovieResponse;
 
 public class MovieFragment extends Fragment {
     private RecyclerView rvNowplaying;
-    private MovieViewModel movieViewModel;
     private MovieAdapter movieAdapter;
     private MovieNowplayingAdapter movieNowplayingAdapter;
-    LinearLayoutManager layoutManagerHor
-            = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-    CenterZoomLayoutManager centerZoomLayoutManager = new CenterZoomLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    private CenterZoomLayoutManager centerZoomLayoutManager = new CenterZoomLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+    private SnapHelper snapHelper = new PagerSnapHelper();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -31,15 +29,13 @@ public class MovieFragment extends Fragment {
         rvNowplaying = v.findViewById(R.id.rv_nowplaying);
         rvNowplaying.setHasFixedSize(true);
         rvNowplaying.setLayoutManager(centerZoomLayoutManager);
+        snapHelper.attachToRecyclerView(rvNowplaying);
         setHasOptionsMenu(true);
 
-        movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
-        movieViewModel.liveNowplayingMovie().observe(getViewLifecycleOwner(), new Observer<NowPlayingMovieResponse>() {
-            @Override
-            public void onChanged(NowPlayingMovieResponse nowPlayingMovieResponse) {
-                movieNowplayingAdapter = new MovieNowplayingAdapter(getContext(), nowPlayingMovieResponse.getResults());
-                rvNowplaying.setAdapter(movieNowplayingAdapter);
-            }
+        MovieViewModel movieViewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
+        movieViewModel.liveNowplayingMovie().observe(getViewLifecycleOwner(), nowPlayingMovieResponse -> {
+            movieNowplayingAdapter = new MovieNowplayingAdapter(getContext(), nowPlayingMovieResponse.getResults());
+            rvNowplaying.setAdapter(movieNowplayingAdapter);
         });
 
         return v;
