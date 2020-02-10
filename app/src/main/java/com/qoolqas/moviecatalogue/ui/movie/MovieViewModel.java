@@ -49,7 +49,7 @@ public class MovieViewModel extends ViewModel {
     }
 
 
-    public void loadNowplayingMovie() {
+    private void loadNowplayingMovie() {
         Service service = Client.getClient().create(Service.class);
         Call<NowPlayingMovieResponse> call = service.getNowplayingMovie(api);
         call.enqueue(new Callback<NowPlayingMovieResponse>() {
@@ -67,7 +67,7 @@ public class MovieViewModel extends ViewModel {
         });
     }
 
-    public LiveData<NowPlayingMovieResponse> liveNowplayingMovie() {
+    LiveData<NowPlayingMovieResponse> liveNowplayingMovie() {
         if (getNowplayingMovie == null) {
             getNowplayingMovie = new MutableLiveData<>();
             loadNowplayingMovie();
