@@ -1,6 +1,8 @@
 package com.qoolqas.moviecatalogue.ui.movie;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Movie;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.qoolqas.moviecatalogue.R;
+import com.qoolqas.moviecatalogue.pojo.movie.MovieData;
 import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingResultsItem;
+import com.qoolqas.moviecatalogue.ui.movie.detail.DetailActivity;
 
 import java.util.List;
 
@@ -69,6 +73,15 @@ public class MovieNowplayingAdapter extends RecyclerView.Adapter<MovieNowplaying
             np_img = itemView.findViewById(R.id.np_img);
             np_title = itemView.findViewById(R.id.np_title);
 
+            itemView.setOnClickListener(view -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    NowPlayingResultsItem clickedItem = nowPlaying.get(position);
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra("id", clickedItem);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

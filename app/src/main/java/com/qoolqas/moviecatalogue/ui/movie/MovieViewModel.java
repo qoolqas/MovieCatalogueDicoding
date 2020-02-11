@@ -41,6 +41,7 @@ public class MovieViewModel extends ViewModel {
     }
 
     public LiveData<MovieResponse> liveMovie() {
+        Log.d("gdjagd", "dadad");
         if (getMovie == null) {
             getMovie = new MutableLiveData<>();
             loadMovie();

@@ -25,13 +25,6 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.ViewHo
         this.movieData = item;
     }
 
-    @NonNull
-    @Override
-    public ViewHolderMovie onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_main, parent, false);
-        return new ViewHolderMovie(view);
-    }
-
 
     @Override
     public void onBindViewHolder(@NonNull DiscoverAdapter.ViewHolderMovie holder, int position) {
@@ -39,6 +32,14 @@ public class DiscoverAdapter extends RecyclerView.Adapter<DiscoverAdapter.ViewHo
         Glide.with(context).load("https://image.tmdb.org/t/p/w185" + movieData.get(position).getPosterPath()).into(holder.poster);
 
     }
+
+    @NonNull
+    @Override
+    public ViewHolderMovie onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_main, parent, false);
+        return new ViewHolderMovie(view);
+    }
+
 
     @Override
     public int getItemCount() {
