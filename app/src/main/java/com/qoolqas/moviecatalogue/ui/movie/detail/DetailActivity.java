@@ -42,7 +42,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
         collapsingToolbarLayout.setCollapsedTitleTextColor(
-                ContextCompat.getColor(this, R.color.white));
+                ContextCompat.getColor(this, R.color.colorAccent));
         collapsingToolbarLayout.setExpandedTitleColor(
                 ContextCompat.getColor(this, R.color.transparent));
 
