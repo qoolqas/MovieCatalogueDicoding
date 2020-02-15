@@ -7,7 +7,10 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -17,6 +20,8 @@ import com.qoolqas.moviecatalogue.connection.Service;
 import com.qoolqas.moviecatalogue.pojo.movie.detail.DetailMovieResponse;
 import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingResultsItem;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,12 +32,15 @@ public class DetailActivity extends AppCompatActivity {
     ImageView backdrop, poster;
     Context context = this;
 
+    @BindView(R.id.detail_title)
+    TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         nowPlayingResultsItem = getIntent().getParcelableExtra("id");
-
+        ButterKnife.bind(this);
         backdrop = findViewById(R.id.backdrop);
         poster = findViewById(R.id.poster);
         Toolbar toolbar = findViewById(R.id.toolbar1);
@@ -56,11 +64,13 @@ public class DetailActivity extends AppCompatActivity {
             public void onResponse(Call<DetailMovieResponse> call, Response<DetailMovieResponse> response) {
                 DetailMovieResponse detailMovieResponse = response.body();
                 try {
+                    assert detailMovieResponse != null;
                     collapsingToolbarLayout.setTitle(detailMovieResponse.getTitle());
+                    title.setText(detailMovieResponse.getTitle());
                     Glide.with(context).load("https://image.tmdb.org/t/p/w185" + detailMovieResponse.getPosterPath()).into(poster);
                     Glide.with(context).load("https://image.tmdb.org/t/p/original" + detailMovieResponse.getBackdropPath()).into(backdrop);
                 } catch (Exception e) {
-
+                    Log.d("failure", "gagal");
                 }
 
 

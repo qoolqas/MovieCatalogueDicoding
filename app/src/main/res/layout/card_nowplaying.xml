@@ -28,7 +28,7 @@
         <ImageView
             android:id="@+id/np_img"
             android:layout_width="150dp"
-            android:contentDescription="Image"
+            android:contentDescription="@string/content"
             android:layout_height="225dp"
             android:layout_gravity="fill"
             android:foregroundGravity="fill"
