@@ -1,9 +1,12 @@
 package com.qoolqas.moviecatalogue.pojo.movie.image;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 
-public class PostersItem {
+public class PostersItem implements Parcelable {
 
     @SerializedName("aspect_ratio")
     private double aspectRatio;
@@ -95,4 +98,45 @@ public class PostersItem {
                         ",height = '" + height + '\'' +
                         "}";
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(this.aspectRatio);
+        dest.writeString(this.filePath);
+        dest.writeInt(this.voteAverage);
+        dest.writeInt(this.width);
+        dest.writeString(this.iso6391);
+        dest.writeInt(this.voteCount);
+        dest.writeInt(this.height);
+    }
+
+    public PostersItem() {
+    }
+
+    protected PostersItem(Parcel in) {
+        this.aspectRatio = in.readDouble();
+        this.filePath = in.readString();
+        this.voteAverage = in.readInt();
+        this.width = in.readInt();
+        this.iso6391 = in.readString();
+        this.voteCount = in.readInt();
+        this.height = in.readInt();
+    }
+
+    public static final Parcelable.Creator<PostersItem> CREATOR = new Parcelable.Creator<PostersItem>() {
+        @Override
+        public PostersItem createFromParcel(Parcel source) {
+            return new PostersItem(source);
+        }
+
+        @Override
+        public PostersItem[] newArray(int size) {
+            return new PostersItem[size];
+        }
+    };
 }
