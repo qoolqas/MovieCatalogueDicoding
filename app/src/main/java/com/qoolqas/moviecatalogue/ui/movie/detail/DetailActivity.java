@@ -18,7 +18,11 @@ import com.qoolqas.moviecatalogue.R;
 import com.qoolqas.moviecatalogue.connection.Client;
 import com.qoolqas.moviecatalogue.connection.Service;
 import com.qoolqas.moviecatalogue.pojo.movie.detail.DetailMovieResponse;
+import com.qoolqas.moviecatalogue.pojo.movie.image.ImageMovieResponse;
+import com.qoolqas.moviecatalogue.pojo.movie.image.PostersItem;
 import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingResultsItem;
+
+import org.jetbrains.annotations.NotNull;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +32,7 @@ import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
     DetailMovieResponse detailMovieResponse;
+    PostersItem postersItem;
     NowPlayingResultsItem nowPlayingResultsItem;
     ImageView backdrop, poster;
     Context context = this;
@@ -82,5 +87,22 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
+        Service serviceImage = Client.getClient().create(Service.class);
+        Call<ImageMovieResponse> call = serviceImage.getImagesMovie(api, id);
+        call.enqueue(new Callback<ImageMovieResponse>() {
+
+            @Override
+            public void onResponse(@NotNull Call<ImageMovieResponse> call, @NotNull Response<ImageMovieResponse> response) {
+                ImageMovieResponse imageMovieResponse = response.body();
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ImageMovieResponse> call, @NotNull Throwable t) {
+                Log.e("failure", t.toString());
+
+            }
+        });
     }
+
+
 }

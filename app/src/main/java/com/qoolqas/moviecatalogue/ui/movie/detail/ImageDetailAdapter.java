@@ -15,23 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.qoolqas.moviecatalogue.R;
+import com.qoolqas.moviecatalogue.pojo.movie.image.PostersItem;
 import com.qoolqas.moviecatalogue.pojo.movie.nowplaying.NowPlayingResultsItem;
-
 import java.util.List;
 
 public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.ViewHolderMovieNp> {
-    private List<NowPlayingResultsItem> nowPlaying;
+    private List<PostersItem> poster;
     private Context context;
 
-    ImageDetailAdapter(Context context, List<NowPlayingResultsItem> item) {
+    ImageDetailAdapter(Context context, List<PostersItem> item) {
         this.context = context;
-        this.nowPlaying = item;
+        this.poster = item;
     }
 
 
     @Override
     public void onBindViewHolder(@NonNull ImageDetailAdapter.ViewHolderMovieNp holder, int position) {
-        Glide.with(context).load("https://image.tmdb.org/t/p/w185" + nowPlaying.get(position).getPosterPath()).into(holder.np_img);
+        Glide.with(context).load("https://image.tmdb.org/t/p/w185" + poster.get(position).getFilePath()).into(holder.np_img);
 
     }
 
@@ -44,7 +44,7 @@ public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.
 
     @Override
     public int getItemCount() {
-        return nowPlaying.size();
+        return poster.size();
     }
 
     class ViewHolderMovieNp extends RecyclerView.ViewHolder {
@@ -72,8 +72,8 @@ public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    NowPlayingResultsItem clickedItem = nowPlaying.get(position);
-                    Intent intent = new Intent(context, DetailActivity.class);
+                    PostersItem clickedItem = poster.get(position);
+                    Intent intent = new Intent(context, ImageDetailActivity.class);
                     intent.putExtra("id", clickedItem);
                     context.startActivity(intent);
                 }
