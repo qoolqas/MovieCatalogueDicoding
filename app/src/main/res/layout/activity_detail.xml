@@ -150,6 +150,7 @@
                 tools:text="Frozen adalah film fantasi musikal animasi komputer 3D Amerika 2013 yang diproduksi oleh Walt Disney Animation Studios dan dirilis oleh Walt Disney Pictures. Film fitur animasi Disney ke-53, terinspirasi oleh dongeng Hans Christian Andersen The Snow Queen." />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"

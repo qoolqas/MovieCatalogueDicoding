@@ -41,7 +41,6 @@ public class DiscoverFragment extends Fragment {
         movieViewModel.liveMovie().observe(getViewLifecycleOwner(), movie -> {
             discoverAdapter = new DiscoverAdapter(getContext(), movie.getResults());
             recyclerView.setAdapter(discoverAdapter);
-            Toast.makeText(getActivity(), movie.getResults().toString(), Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
         });
         progressBar.setVisibility(View.VISIBLE);

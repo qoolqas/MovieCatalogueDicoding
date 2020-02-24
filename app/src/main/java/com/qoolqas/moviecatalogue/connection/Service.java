@@ -38,8 +38,10 @@ public interface Service {
                                               @Path("movie_id") int id);
 
     @GET("movie/{movie_id}/images")
-    Call<ImageMovieResponse> getImagesMovie(@Query("api_key") String apiKey,
-                                            @Path("movie_id") int id);
+    Call<ImageMovieResponse> getImagesMovie(
+            @Path("movie_id") int id,
+            @Query("api_key") String apiKey);
+
 
     @GET("movie/{movie_id}/similar")
     Call<DetailMovieResponse> getSimiliarMovie(@Query("api_key") String apiKey,

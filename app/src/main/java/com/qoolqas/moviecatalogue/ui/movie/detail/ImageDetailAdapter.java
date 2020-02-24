@@ -49,25 +49,10 @@ public class ImageDetailAdapter extends RecyclerView.Adapter<ImageDetailAdapter.
 
     class ViewHolderMovieNp extends RecyclerView.ViewHolder {
         ImageView np_img;
-        TextView np_title;
 
         ViewHolderMovieNp(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnFocusChangeListener((v, hasFocus) -> {
-                if (hasFocus) {
-                    // run scale animation and make it bigger
-                    Animation anim = AnimationUtils.loadAnimation(context, R.anim.scale_in_tv);
-                    itemView.startAnimation(anim);
-                    anim.setFillAfter(true);
-                } else {
-                    // run scale animation and make it smaller
-                    Animation anim = AnimationUtils.loadAnimation(context, R.anim.scale_out_tv);
-                    itemView.startAnimation(anim);
-                    anim.setFillAfter(true);
-                }
-            });
             np_img = itemView.findViewById(R.id.np_img);
-            np_title = itemView.findViewById(R.id.np_title);
 
             itemView.setOnClickListener(view -> {
                 int position = getAdapterPosition();
