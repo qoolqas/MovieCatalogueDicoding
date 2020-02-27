@@ -3,6 +3,10 @@ package com.qoolqas.moviecatalogue.ui.movie.detail;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +18,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.qoolqas.moviecatalogue.CenterZoomLayoutManager;
 import com.qoolqas.moviecatalogue.R;
 import com.qoolqas.moviecatalogue.connection.Client;
 import com.qoolqas.moviecatalogue.connection.Service;
@@ -31,11 +36,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailActivity extends AppCompatActivity {
-    DetailMovieResponse detailMovieResponse;
-    PostersItem postersItem;
     NowPlayingResultsItem nowPlayingResultsItem;
     ImageView backdrop, poster;
     Context context = this;
+    RecyclerView rvImage;
+    private CenterZoomLayoutManager centerZoomLayoutManager = new CenterZoomLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+    private SnapHelper snapHelper = new PagerSnapHelper();
+    ImageDetailAdapter imageDetailAdapter;
+
 
     @BindView(R.id.detail_title)
     TextView title;
@@ -48,6 +56,11 @@ public class DetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         backdrop = findViewById(R.id.backdrop);
         poster = findViewById(R.id.poster);
+        rvImage = findViewById(R.id.list_image);
+        rvImage.setHasFixedSize(true);
+        rvImage.setLayoutManager(centerZoomLayoutManager);
+        snapHelper.attachToRecyclerView(rvImage);
+
         Toolbar toolbar = findViewById(R.id.toolbar1);
         setSupportActionBar(toolbar);
 
@@ -88,12 +101,13 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         Service serviceImage = Client.getClient().create(Service.class);
-        Call<ImageMovieResponse> call = serviceImage.getImagesMovie(api, id);
+        Call<ImageMovieResponse> call = serviceImage.getImagesMovie(id, api);
         call.enqueue(new Callback<ImageMovieResponse>() {
 
             @Override
             public void onResponse(@NotNull Call<ImageMovieResponse> call, @NotNull Response<ImageMovieResponse> response) {
                 ImageMovieResponse imageMovieResponse = response.body();
+                rvImage.setAdapter(imageDetailAdapter);
             }
 
             @Override
